@@ -1,17 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.tp1_jee.controller.DashboardController">
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.tp1_jee.controller.DashboardController"
+            style="-fx-background-color: #f5f5f5;">
 
+    <!-- En-tête -->
     <top>
-        <Label text="Dashboard Stock" style="-fx-font-size:18px;"/>
+        <HBox style="-fx-background-color: #2196F3; -fx-padding: 15;"
+              alignment="CENTER_LEFT" spacing="20">
+            <Label text="Stock App" style="-fx-text-fill: white; -fx-font-size: 20; -fx-font-weight: bold;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Label fx:id="welcomeLabel" text="Bienvenue" style="-fx-text-fill: white; -fx-font-size: 14;"/>
+            <Button text="Déconnexion" onAction="#handleLogout"
+                    style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+        </HBox>
     </top>
 
-</BorderPane>
+    <!-- Menu latéral -->
+    <left>
+        <VBox style="-fx-background-color: #263238; -fx-padding: 10;"
+              spacing="10" prefWidth="200">
+            <Button text="📊 Dashboard" onAction="#showDashboard"
+                    style="-fx-background-color: #37474F; -fx-text-fill: white; -fx-font-size: 14;"
+                    maxWidth="Infinity" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+            </Button>
 
+            <Button text="📦 Produits" onAction="#showProducts"
+                    style="-fx-background-color: #37474F; -fx-text-fill: white; -fx-font-size: 14;"
+                    maxWidth="Infinity" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+            </Button>
+
+            <Button text="📥 Stock" onAction="#showStock"
+                    style="-fx-background-color: #37474F; -fx-text-fill: white; -fx-font-size: 14;"
+                    maxWidth="Infinity" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+            </Button>
+
+            <Button text="👤 Profil" onAction="#showProfile"
+                    style="-fx-background-color: #37474F; -fx-text-fill: white; -fx-font-size: 14;"
+                    maxWidth="Infinity" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+            </Button>
+        </VBox>
+    </left>
+
+    <!-- Contenu central -->
+    <center>
+        <VBox alignment="CENTER" spacing="30" style="-fx-padding: 40;">
+
+            <!-- Cartes de statistiques -->
+            <HBox spacing="20" alignment="CENTER">
+
+                <!-- Carte 1 -->
+                <VBox alignment="CENTER" spacing="10"
+                      style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);"
+                      prefWidth="200" prefHeight="150">
+                    <Label text="📦" style="-fx-font-size: 40;"/>
+                    <Label text="Total Produits" style="-fx-font-size: 14; -fx-text-fill: #757575;"/>
+                    <Label fx:id="totalProductsLabel" text="0" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #2196F3;"/>
+                </VBox>
+
+                <!-- Carte 2 -->
+                <VBox alignment="CENTER" spacing="10"
+                      style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);"
+                      prefWidth="200" prefHeight="150">
+                    <Label text="📊" style="-fx-font-size: 40;"/>
+                    <Label text="En Stock" style="-fx-font-size: 14; -fx-text-fill: #757575;"/>
+                    <Label fx:id="inStockLabel" text="0" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #4CAF50;"/>
+                </VBox>
+
+                <!-- Carte 3 -->
+                <VBox alignment="CENTER" spacing="10"
+                      style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);"
+                      prefWidth="200" prefHeight="150">
+                    <Label text="⚠️" style="-fx-font-size: 40;"/>
+                    <Label text="Stock Faible" style="-fx-font-size: 14; -fx-text-fill: #757575;"/>
+                    <Label fx:id="lowStockLabel" text="0" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #ff9800;"/>
+                </VBox>
+
+            </HBox>
+
+            <!-- Section d'actions rapides -->
+            <VBox alignment="CENTER" spacing="15"
+                  style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);"
+                  maxWidth="650">
+                <Label text="Actions Rapides" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+                <HBox spacing="15" alignment="CENTER">
+                    <Button text="➕ Ajouter Produit" onAction="#addProduct"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14;"
+                            prefWidth="180" prefHeight="40"/>
+
+                    <Button text="📋 Voir Inventaire" onAction="#viewInventory"
+                            style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14;"
+                            prefWidth="180" prefHeight="40"/>
+
+                    <Button text="📊 Rapports" onAction="#viewReports"
+                            style="-fx-background-color: #9C27B0; -fx-text-fill: white; -fx-font-size: 14;"
+                            prefWidth="180" prefHeight="40"/>
+                </HBox>
+            </VBox>
+
+        </VBox>
+    </center>
+
+    <!-- Pied de page -->
+    <bottom>
+        <HBox style="-fx-background-color: #263238; -fx-padding: 10;" alignment="CENTER">
+            <Label fx:id="statusLabel" text="Prêt" style="-fx-text-fill: white; -fx-font-size: 12;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

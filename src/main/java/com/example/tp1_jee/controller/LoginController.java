@@ -1,5 +1,7 @@
 package com.example.tp1_jee.controller;
 
+import com.example.tp1_jee.model.Session;
+import com.example.tp1_jee.model.User;
 import com.example.tp1_jee.service.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,9 +35,30 @@ public class LoginController {
         }
 
         if (userService.authenticate(username, password)) {
-            showMessage("Connexion réussie !", "green");
-            // TODO: Naviguer vers le dashboard
-            System.out.println("Bienvenue " + username + " !");
+            try {
+                // Récupérer l'utilisateur et sauvegarder dans la session
+                User user = userService.findUserByUsername(username);
+                Session.getInstance().setCurrentUser(user);
+
+                // Charger le dashboard
+                FXMLLoader loader = new FXMLLoader(
+                        getClass().getResource("/com/example/tp1_jee/dashboard.fxml"));
+                Parent root = loader.load();
+
+                // Passer le nom d'utilisateur au dashboard
+                DashboardController dashboardController = loader.getController();
+                dashboardController.setUsername(username);
+
+                // Changer de scène
+                Stage stage = (Stage) usernameField.getScene().getWindow();
+                stage.setScene(new Scene(root, 900, 600));
+                stage.setTitle("Stock App - Dashboard");
+                stage.centerOnScreen();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                showMessage("Erreur lors du chargement du dashboard", "red");
+            }
         } else {
             showMessage("Identifiants incorrects", "red");
         }
