@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.lang.String?>
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.tp1_jee.controller.AddProductController"
+            style="-fx-background-color: #f5f5f5;">
+
+    <top>
+        <HBox style="-fx-background-color: #2196F3; -fx-padding: 15;" alignment="CENTER_LEFT">
+            <Label text="Ajouter un Produit" style="-fx-text-fill: white; -fx-font-size: 20; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background: #f5f5f5;">
+            <VBox spacing="20" style="-fx-padding: 30;">
+
+                <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 10;">
+
+                    <Label text="Informations Générales" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+                    <HBox spacing="15">
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="Nom du Produit *"/>
+                            <TextField fx:id="nameField" promptText="Ex: Ordinateur portable"/>
+                        </VBox>
+
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="Catégorie *"/>
+                            <ComboBox fx:id="categoryComboBox" promptText="Sélectionner" maxWidth="Infinity">
+                                <items>
+                                    <javafx.collections.FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="Électronique"/>
+                                        <String fx:value="Vêtements"/>
+                                        <String fx:value="Alimentation"/>
+                                        <String fx:value="Mobilier"/>
+                                        <String fx:value="Jouets"/>
+                                        <String fx:value="Livres"/>
+                                        <String fx:value="Sport"/>
+                                        <String fx:value="Autre"/>
+                                    </javafx.collections.FXCollections>
+                                </items>
+                            </ComboBox>
+                        </VBox>
+                    </HBox>
+
+                    <VBox spacing="5">
+                        <Label text="Description"/>
+                        <TextArea fx:id="descriptionArea" promptText="Description détaillée du produit"
+                                  prefRowCount="3" wrapText="true"/>
+                    </VBox>
+
+                </VBox>
+
+                <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 10;">
+
+                    <Label text="Prix et Stock" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+                    <HBox spacing="15">
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="Prix (DH) *"/>
+                            <TextField fx:id="priceField" promptText="0.00"/>
+                        </VBox>
+
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="Quantité *"/>
+                            <TextField fx:id="quantityField" promptText="0"/>
+                        </VBox>
+
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="Seuil d'Alerte *"/>
+                            <TextField fx:id="minStockField" promptText="Stock minimum"/>
+                        </VBox>
+                    </HBox>
+
+                </VBox>
+
+                <Label fx:id="messageLabel" wrapText="true"/>
+
+                <HBox spacing="15" alignment="CENTER">
+                    <Button text="Enregistrer" onAction="#handleSave"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14;"
+                            prefWidth="150" prefHeight="40"/>
+
+                    <Button text="Réinitialiser" onAction="#handleReset"
+                            style="-fx-background-color: #ff9800; -fx-text-fill: white; -fx-font-size: 14;"
+                            prefWidth="150" prefHeight="40"/>
+
+                    <Button text="Retour" onAction="#handleBack"
+                            style="-fx-background-color: #757575; -fx-text-fill: white; -fx-font-size: 14;"
+                            prefWidth="150" prefHeight="40"/>
+                </HBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

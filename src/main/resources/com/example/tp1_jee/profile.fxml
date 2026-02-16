@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.tp1_jee.controller.ProfileController"
+            style="-fx-background-color: #f5f5f5;">
+
+    <top>
+        <HBox style="-fx-background-color: #2196F3; -fx-padding: 15;" alignment="CENTER_LEFT" spacing="20">
+            <Label text="👤 Mon Profil" style="-fx-text-fill: white; -fx-font-size: 20; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Retour au Dashboard" onAction="#backToDashboard"
+                    style="-fx-background-color: #757575; -fx-text-fill: white; -fx-font-size: 14;"
+                    prefWidth="180" prefHeight="35"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background: #f5f5f5;">
+            <VBox spacing="25" style="-fx-padding: 40;" alignment="TOP_CENTER">
+
+                <!-- Avatar et informations principales -->
+                <VBox alignment="CENTER" spacing="15"
+                      style="-fx-background-color: white; -fx-padding: 40; -fx-background-radius: 10;"
+                      maxWidth="600">
+
+                    <Label text="👤" style="-fx-font-size: 80;"/>
+
+                    <Label fx:id="usernameLabel" text="Nom d'utilisateur"
+                           style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+
+                    <Label fx:id="roleLabel" text="Administrateur"
+                           style="-fx-font-size: 14; -fx-text-fill: #757575;"/>
+                </VBox>
+
+                <!-- Informations du compte -->
+                <VBox spacing="15"
+                      style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10;"
+                      maxWidth="600">
+
+                    <Label text="Informations du Compte"
+                           style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+                    <Separator/>
+
+                    <VBox spacing="5">
+                        <Label text="Nom d'utilisateur" style="-fx-text-fill: #757575; -fx-font-size: 12;"/>
+                        <TextField fx:id="usernameField" editable="false"
+                                   style="-fx-background-color: #f5f5f5;"/>
+                    </VBox>
+
+                    <VBox spacing="5">
+                        <Label text="Email" style="-fx-text-fill: #757575; -fx-font-size: 12;"/>
+                        <TextField fx:id="emailField" editable="false"
+                                   style="-fx-background-color: #f5f5f5;"/>
+                    </VBox>
+
+                    <VBox spacing="5">
+                        <Label text="Rôle" style="-fx-text-fill: #757575; -fx-font-size: 12;"/>
+                        <TextField fx:id="roleField" editable="false"
+                                   style="-fx-background-color: #f5f5f5;"/>
+                    </VBox>
+
+                    <VBox spacing="5">
+                        <Label text="Date d'inscription" style="-fx-text-fill: #757575; -fx-font-size: 12;"/>
+                        <TextField fx:id="registrationDateField" editable="false"
+                                   style="-fx-background-color: #f5f5f5;"/>
+                    </VBox>
+                </VBox>
+
+                <!-- Changer le mot de passe -->
+                <VBox spacing="15"
+                      style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10;"
+                      maxWidth="600">
+
+                    <Label text="Changer le Mot de Passe"
+                           style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+                    <Separator/>
+
+                    <VBox spacing="5">
+                        <Label text="Ancien mot de passe"/>
+                        <PasswordField fx:id="oldPasswordField" promptText="••••••••"/>
+                    </VBox>
+
+                    <VBox spacing="5">
+                        <Label text="Nouveau mot de passe"/>
+                        <PasswordField fx:id="newPasswordField" promptText="••••••••"/>
+                    </VBox>
+
+                    <VBox spacing="5">
+                        <Label text="Confirmer le nouveau mot de passe"/>
+                        <PasswordField fx:id="confirmPasswordField" promptText="••••••••"/>
+                    </VBox>
+
+                    <Label fx:id="passwordMessageLabel" wrapText="true" visible="false"/>
+
+                    <HBox spacing="15" alignment="CENTER">
+                        <Button text="💾 Enregistrer" onAction="#changePassword"
+                                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14;"
+                                prefWidth="150" prefHeight="40"/>
+
+                        <Button text="↺ Annuler" onAction="#resetPasswordFields"
+                                style="-fx-background-color: #757575; -fx-text-fill: white; -fx-font-size: 14;"
+                                prefWidth="150" prefHeight="40"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Statistiques de l'utilisateur -->
+                <VBox spacing="15"
+                      style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10;"
+                      maxWidth="600">
+
+                    <Label text="Statistiques d'Activité"
+                           style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+                    <Separator/>
+
+                    <HBox spacing="40" alignment="CENTER">
+                        <VBox alignment="CENTER" spacing="5">
+                            <Label text="📦" style="-fx-font-size: 32;"/>
+                            <Label fx:id="productsCreatedLabel" text="0"
+                                   style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2196F3;"/>
+                            <Label text="Produits ajoutés"
+                                   style="-fx-font-size: 12; -fx-text-fill: #757575;"/>
+                        </VBox>
+
+                        <VBox alignment="CENTER" spacing="5">
+                            <Label text="📝" style="-fx-font-size: 32;"/>
+                            <Label fx:id="lastLoginLabel" text="-"
+                                   style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #4CAF50;"/>
+                            <Label text="Dernière connexion"
+                                   style="-fx-font-size: 12; -fx-text-fill: #757575;"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
